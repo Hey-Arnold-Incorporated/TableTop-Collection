@@ -6,7 +6,7 @@ const theme = {
   ...DefaultTheme,
   dark: false,
   version: 3,
-  roundness: 5,
+  roundness: 8,
   colors: {
     // ...DefaultTheme.colors,
     //PRIMARY(Green)---------
@@ -61,22 +61,21 @@ const theme = {
   // },
   components: {
     textInput: {
-      box: {
-        height: 61,
-        width: 344,
-        borderRadius: 8,
-        backgroundColor: '#FFF5DD',
-        shadowOffset: {
-          width: 0,
-          height: 0,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 0,
+      height: 40,
+      width: 344,
+      border: 5,
+      borderRadius: 8,
+      marginBottom: 10,
+      backgroundColor: '#FFF5DD',
+      shadowOffset: {
+        shadowColor: "#4A3018",
+        width: 0,
+        height: 5,
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
       },
-      text: {
-        color: "#4A3018",
-        fontSize: 16,
-      }
+      color: "#4A3018",
+      fontSize: 16,
     },
     gameWardenCarCard: {
 

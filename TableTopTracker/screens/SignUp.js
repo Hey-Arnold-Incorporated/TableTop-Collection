@@ -62,47 +62,57 @@ export default function SignUp ({navigation}) {
     }
   };
     return (
-        <View>
-            <TextInput
-              onChangeText={setEmail}
-              value={email}
-              placeholder="Email"
-            />
-            <TextInput
-              onChangeText={setFullname}
-              value={fullname}
-              placeholder="Full Name"
-            />
-            <TextInput
-              onChangeText={setUsername}
-              value={username}
-              placeholder="Username"
-            />
-            <TextInput
-              onChangeText={setPassword}
-              value={password}
-              placeholder="Password"
-              secureTextEntry
-            />
-
-
-            <Button title="Upload Profile Photo" onPress={handleImageUpload} />
-              {imageURL && <Image source={{ uri: imageURL }} />}
-            <Button
-              title="Next"
-              onPress={ async () => {
-                await handleSignUp();
-                await navigation.navigate('New User Preferences', {uid: uid, email: email, fullname: fullname, username: username, profilePhoto: imageURL })
-              }
-              }
-            />
-            <Text> Have an Account? </Text>
-            <Button
-              title="Log in"
-              onPress={() => {
-                  navigation.navigate('Login', {name: username});
-              }}
-            />
+      <View style={styles.parentContainer}>
+        <View style={styles.branding}>
+          <View style={styles.logo}></View>
+          <View style={styles.bgg}>Powered by Board Game Geek</View>
         </View>
+        <View style={styles.userInput}>
+          <TextInput
+            style={styles.textInputBox}
+            onChangeText={setEmail}
+            value={email}
+            placeholder="Email"
+          />
+          <TextInput
+            style={styles.textInputBox}
+            style={styles.textInputBox}
+            onChangeText={setFullname}
+            value={fullname}
+            placeholder="Full Name"
+          />
+          <TextInput
+            style={styles.textInputBox}
+            onChangeText={setUsername}
+            value={username}
+            placeholder="Username"
+          />
+          <TextInput
+            style={styles.textInputBox}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="Password"
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.buttonsContainer}>
+          <Button title="Upload Profile Photo" onPress={handleImageUpload} />
+              {imageURL && <Image source={{ uri: imageURL }}
+          />}
+          <Button
+            title="Next"
+            onPress={ async () => {
+              await handleSignUp();
+              await navigation.navigate('New User Preferences', {uid: uid, email: email, fullname: fullname, username: username, profilePhoto: imageURL })}
+          }/>
+          <Text> Have an Account? </Text>
+          <Button
+            title="Log in"
+            onPress={() => {
+                navigation.navigate('Login', {name: username});
+            }}
+          />
+        </View>
+      </View>
     )
 }
