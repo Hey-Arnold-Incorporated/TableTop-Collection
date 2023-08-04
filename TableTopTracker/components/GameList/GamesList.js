@@ -2,12 +2,20 @@ import React, { useEffect } from 'react';
 import { View, Text, FlatList, Animated, Easing } from 'react-native';
 import GameCard from './GameCard';
 import styles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 /* (DIRECTIONS):
   1. handle appropriate filtering logic
   2. pass in list (state in parent component, i.e. screen)
 */
 export default function GamesList({ handlePress, games, listType }) {
+  const dispatch = useDispatch();
+  const collections = useSelector(state => state.collections);
+
+  console.log('games in gamesList', games);
+
+  // console.log("collections in gamesList", collections);
+
   const rotateAnimValue = new Animated.Value(0);
 
   useEffect(() => {
@@ -44,7 +52,7 @@ export default function GamesList({ handlePress, games, listType }) {
           renderItem={ ({ item }) => (
             <GameCard handlePress={handlePress} { ...item } />
           ) }
-          keyExtractor={ ({ boardgameId }) => boardgameId.toString() }
+          keyExtractor={ ({ id }) => id.toString() }
           style={ styles.listContainer }
         />
       </Animated.View>

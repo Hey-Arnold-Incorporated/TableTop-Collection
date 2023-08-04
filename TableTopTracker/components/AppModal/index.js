@@ -24,8 +24,6 @@ export default function AppModal() {
     return <Text>SOMETHINGS GONE TERRIBLY WRONG</Text>
   }
 
-
-
   return (
     <Modal
       animationType="slide"

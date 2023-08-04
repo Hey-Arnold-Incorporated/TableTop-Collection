@@ -39,6 +39,13 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 'auto',
   },
+  cardGrid: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  cardTitle: {
+    textAlign: 'left',
+  },
   focusButton: {
     color: 'blue',
     padding: 8,

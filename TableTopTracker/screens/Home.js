@@ -1,28 +1,48 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import ButtonList from '../components/GameList/ButtonList';
 import GamesList from '../components/GameList/GamesList.js';
 import allDummyGames from '../components/GameList/dummy/allDummyGames';
 import personalDummyGames from '../components/GameList/dummy/personalDummyGames';
 import NavBar from '../components/NavBar/NavBar.js';
+import {useDispatch, useSelector } from 'react-redux';
 
 // testing Slider for Patrick
 import SickSlider from '../components/Sliders/SickSlider';
 
 export default function Home ({ navigation, route }) {
 
-  const collections = [ 'My Games', 'Recommendations', 'Liked', 'Wishlist', 'All' ];
-  const [ listType, setListType ] = useState(collections[0]);
+  // const collections = [ 'My Games', 'Recommendations', 'Liked', 'Wishlist', 'All' ];
+  const collectionNames = useSelector(state => Object.keys(state.collections.collections));
+  const collections = useSelector(state => state.collections.collections);
+
+  const [ listType, setListType ] = useState(collectionNames[0]);
   const [gameDetails, setGameDetails] = useState({});
+  const [ games, setGames ] = useState([]);
 
   let { user, handleLogout } = route.params;
-  console.log('route.params', route.params);
-  console.log('user in home page: ', user);
+  // console.log('route.params', route.params);
+  // console.log('user in home page: ', user);
+  console.log('collections in home', collections);
 
   // console.dir(allDummyGames);
   // console.dir(personalDummyGames);
 
+  useEffect(()=> {
+    async function setGameArray(collectionName) {
+      for(let key in collections) {
+        if (listType === collectionName){
+          console.log('listType in useEffect loop', listType);
+          console.log('collections[key] in useEffect loop', collections[key]);
+          setGames(collections[key]);
+        }
+      }
+    }
+    setGameArray(listType);
+  }, [listType]);
+
   return (
+
     <View style={{paddingBottom: '40px'}}>
       <Text>(Alex): Display Slider for Patrick</Text>
       <SickSlider />
@@ -30,22 +50,15 @@ export default function Home ({ navigation, route }) {
       <Text>This is {user.email}'s HomePage</Text>
       <View style={ styles.gameListContent }>
         <ButtonList
-          collections={ collections }
+          collections={ collectionNames }
           listType={ listType }
           setListType={ setListType }
         />
-      {/* <View>
-        <Button
-          title="Game Details"
-          onPress={() => {
-            navigation.navigate('Game Details', {user: user.username})
-          }}>Game Detail</Button>
-      </View> */}
         <GamesList
           handlePress={() => {
             navigation.navigate('Game Details', {user: user})
           }}
-          games={ allDummyGames }
+          games={ games }
           listType={ listType }
         />
       </View>

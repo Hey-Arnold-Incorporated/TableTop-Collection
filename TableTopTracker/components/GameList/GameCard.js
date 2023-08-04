@@ -16,21 +16,21 @@ export default function GameCard({
         handlePress();
         }}>
         <Card>
-          <Card.Content>
-            {/* layout based on wireframe + site */}
-            <Image
-              style={ styles.thumbnail } // needs to appear left of details
-              source={{ uri: thumbnail }}
-            />
-            <Text>{ minplayers } - { maxplayers } Players</Text>
-            <Text>Playtime: { minplaytime } - { maxplaytime } Min</Text>
-            <Text>Complexity: { complexity }</Text>
-            <Text>{ year_published }</Text>
-            {/* <Text>{ description }</Text> */}
+          <Card.Content style={styles.cardGrid}>
+            <View>
+              <Image
+                style={ styles.thumbnail } // needs to appear left of details
+                source={{ uri: thumbnail }}
+              />
+            </View>
+            <View>
+              <Text>{ minplayers } - { maxplayers } Players</Text>
+              <Text>Playtime: { minplaytime } - { maxplaytime } Min</Text>
+              <Text>Complexity: { complexity }</Text>
+              <Text>{ year_published }</Text>
+              <Card.Title title={title} titleStyle={styles.cardTitle}/>
+            </View>
           </Card.Content>
-
-          {/* not rendering title for some reason (suspect naming convention issue?) */}
-          <Card.Title>{ title }</Card.Title>
         </Card>
       </TouchableOpacity>
     </View>
